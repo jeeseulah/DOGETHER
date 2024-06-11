@@ -1,0 +1,60 @@
+<html layout:decorate="~{layout/layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <div  layout:fragment="content">
+        <div class="container my-5 py-5 d-flex justify-content-center">
+            <form th:object="${memberForm}" method="post" th:action="@{/add}" class="rounded-3 bg-loginform p-4 shadow">
+                <legend class="text-center my-3 fs-3 fw-bold brownBoldText">회원가입</legend>
+    <div class="mb-3">
+        <label class="form-label fw-bold brownBoldText" th:for="name">이름 <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div></label>
+        <input type="text" th:field="*{name}" class="form-control" th:errorclass="field-error">
+        <div class="field-error" th:error="*{name}"></div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label fw-bold brownBoldText" th:for="loginId">이메일 <div th:if="${#fields.hasErrors('loginId')}" th:errors="*{loginId}"></div></label>
+        <input type="email" th:field="*{loginId}" class="form-control" th:errorclass="field-error">
+        <button type="submit" formaction="/checkLoginId" class="btn btn-brown bg-brown mt-2">중복 확인</button>
+        <span class="mx-1" th:if="${isDuplicate != null}" th:text="${isDuplicate} ? '이미 사용 중인 아이디입니다.' : '사용 가능한 아이디입니다.'" th:classappend="${isDuplicate} ? 'text-danger' : 'text-primary'"></span>
+        <div class="field-error" th:error="*{loginId}"></div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label fw-bold brownBoldText" th:for="password">비밀번호 <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div></label>
+        <input type="password" th:field="*{password}" class="form-control" th:errorclass="field-error">
+        <div class="field-error" th:error="*{password}"></div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label fw-bold brownBoldText" th:for="checkPassword">비밀번호 확인</label>
+        <input type="password" th:field="*{checkPassword}" class="form-control" th:errorclass="field-error">
+        <div class="field-error" th:error="*{checkPassword}"></div>
+    </div>
+    <div th:if="${#fields.hasErrors('checkPassword')}" th:errors="*{checkPassword}" class="text-danger mb-3"></div>
+
+    <div class="mb-3">
+        <label class="form-label fw-bold brownBoldText" th:for="address">주소</label>
+        <input type="text" th:field="*{address}" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label class="form-label fw-bold brownBoldText" th:for="tel">전화번호</label>
+        <input type="tel" th:field="*{tel}" class="form-control">
+    </div>
+
+    <div class="my-2 d-flex justify-content-center">
+        <label class="fw-bold brownBoldText"><input type="checkbox" th:field="*{isAgree}" value="true"/></label>
+        <label class="form-check-label fw-bold brownBoldText" th:for="isAgree">개인정보처리 동의</label>
+        <div class="field-error" th:error="*{isAgree}"></div>
+    </div>
+
+    <div class="my-2 d-flex justify-content-center text-danger">
+        <div th:if="${#fields.hasErrors('isAgree')}" th:errors="*{isAgree}"></div>
+    </div>
+
+    <div class="col d-flex justify-content-around btn-brown:hover mt-3 mb-3">
+        <button type="submit" class="btn btn-brown w-100 mx-1">회원가입</button>
+        <a th:href="@{/login}" role="button" class="btn btn-brown w-100 mx-1">돌아가기</a>
+    </div>
+</form>
+    </div>
+<script src="/js/SingUp.js"></script>
+</div>
+</html>

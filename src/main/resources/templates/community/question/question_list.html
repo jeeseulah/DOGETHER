@@ -1,0 +1,193 @@
+<html layout:decorate="~{layout/layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  <div layout:fragment="content">
+
+    <th:block th:replace="fragments/community_banner :: communityFragment"></th:block>
+      <!--Q&A 영역 시작-->
+      <div id="question">
+        <div class="container">
+          <!--검색-->
+          <div class="p-3 my-5 bg-body-secondary rounded">
+          <form
+            class="g-2 row justify-content-end"
+            th:action="@{/community/question/question_list}"
+            method="get"
+          >
+            <div class="col-3">
+              <select class="form-select" id="searchOption" name="searchType">
+                <option
+                  selected
+                  value="name"
+                  th:selected="${searchType == 'name'}"
+                >
+                  작성자
+                </option>
+                <option
+                  value="subject"
+                  th:selected="${searchType == 'subject'}"
+                >
+                  제목
+                </option>
+                </select>
+              </div>
+              <div class="col-9 d-flex">
+                <label for="inputSearch" class="visually-hidden"
+                  >검색어를 입력해주세요.</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputSearch"
+                  name="kWord"
+                  placeholder="검색어를 입력해주세요."
+				  th:value="${kWord}"
+                />
+              <button
+                class="btn btn-secondary mx-2"
+                type="submit"
+                id="btnSearch"
+              >
+                  <i class="bi bi-search"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="my-5">
+            <!-- 질문등록 버튼-->
+            <div class="d-flex justify-content-end" th:unless="${loginMember} == null" >
+              <a
+                th:href="@{/community/question/question_create}"
+                role="button"
+                class="btn btn-secondary"
+              >
+                <i class="bi bi-pencil"></i> 질문등록
+              </a>
+            </div>
+          <form
+            th:action="@{/community/question/question_list}"
+            method="get"
+            id="searchForm"
+          >
+            <input type="hidden" id="kWord" name="kWord" th:value="${kWord}" />
+            <input
+              type="hidden"
+              id="page"
+              name="page"
+              th:value="${paging.number}"
+            />
+            <input
+              type="hidden"
+              id="searchType"
+              name="searchType"
+              th:value="${searchType}"
+            />
+          </form>
+            <!--Q&A 테이블-->
+            <table class="table table-hover caption-top text-center">
+              <caption>
+                <small><i class="bi bi-file-earmark"></i> Total <span th:text="${paging.totalElements}">35</span> / <span th:text="${paging.number + 1}">1</span> page</small>
+              </caption>
+              <thead class="table-light">
+                <tr>
+                  <th>상태</th>
+                  <th>제목</th>
+                  <th>작성자</th>
+                  <th>등록일</th>
+                </tr>
+              </thead>
+              <tbody class="table-group-divider">
+                <tr th:each="question , loop:${paging}">
+                  <td>
+                    <span class="badge text-bg-success" th:if="${#lists.size(question.answerList) > 0}">답변완료</span>
+                    <span class="badge text-bg-warning" th:unless="${#lists.size(question.answerList) > 0}">미답변</span>
+                  </td>
+                  <td>
+                    <i class="bi bi-lock-fill bg-secondary-subtle rounded p-1" th:if="${question.isShow}"></i>
+                    <i class="bi bi-unlock-fill bg-secondary-subtle rounded p-1" th:unless="${question.isShow}"></i>
+                    <a th:href="@{/community/question/question_detail/{questionid}(questionid=${question.getId()})}" th:if="${question.isShow == false}" th:text="${question.subject}">문의드려요~</a>
+                    <a th:href="@{/community/question/question_pwd/{questionid}(questionid=${question.getId()})}" th:if="${question.isShow != false and loginAdmin == null} " th:text="${question.subject}">문의드려요~</a>
+                    <a th:href="@{/community/question/question_detail/{questionid}(questionid=${question.getId()})}" th:if="${question.isShow != false and loginAdmin != null}" th:text="${question.subject}">문의드려요~</a>
+                  </td>
+                  <td><span th:text="${question.author.name}" style="font-size: 13px">글쓴이</span></td>
+                  <!--td><small th:text="${question.author.loginId}">홍길동</small></td-->
+                  <td><span th:text="${#temporals.format(question.createDate,'yyyy-MM-dd a hh:mm')}"  style="font-size: 13px">2024-05-17</span></td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- 질문등록 버튼-->
+            <div class="d-flex justify-content-end" th:unless="${loginMember} == null" >
+              <a th:href="@{/community/question/question_create}"
+                role="button"
+                class="btn btn-secondary"
+              >
+                <i class="bi bi-pencil"></i> 질문등록
+              </a>
+            </div>
+          </div>
+          <div id="page-select" class="my-5 py-5">
+            <div th:if="${!paging.isEmpty()}">
+              <ul class="pagination pagination-sm justify-content-center">
+                <li class="page-item">
+                <a
+                  class="page-link link-dark"
+                  th:href="@{|?page=0&kWord=${kWord}&searchType=${searchType}|}"
+                  th:classappend="${!paging.hasPrevious()}?'disabled'"
+                >
+                    <span>&laquo;</span>
+                  </a>
+                </li>
+
+                <li class="page-item">
+                <a
+                  class="page-link link-dark"
+                  th:href="@{|?page=${paging.number -1}&kWord=${kWord}&searchType=${searchType}|}"
+                  th:classappend="${!paging.hasPrevious()}?'disabled'"
+                >
+                    <span>이전</span>
+                  </a>
+                </li>
+
+              <li
+                class="page-item"
+                th:each="page:${#numbers.sequence(0,paging.totalPages -1)}"
+                th:if="${page >= paging.number -5 and page <= paging.number+5}"
+              >
+                <a
+                  class="page-link link-dark"
+                  th:href="@{|?page=${page}&kWord=${kWord}&searchType=${searchType}|}"
+                  th:text="${page+1}"
+                  th:classappend="${page==paging.number}?'active'"
+                  >1</a
+                >
+              </li>
+
+              <li class="page-item">
+                <a
+                  class="page-link link-dark"
+                  th:href="@{|?page=${paging.number+1}&kWord=${kWord}&searchType=${searchType}|}"
+                  th:classappend="${!paging.hasNext()}?'disabled'"
+                >
+                  <span>다음</span></a
+                >
+              </li>
+
+                <li class="page-item">
+                <a
+                  class="page-link link-dark"
+                  th:href="@{|?page=${paging.totalPages -1}&kWord=${kWord}&searchType=${searchType}|}"
+                  th:classappend="${!paging.hasNext()}?'disabled'"
+                >
+                    <span>&raquo;</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!--고객센터-->
+        <th:block th:replace="fragments/community_footer :: communityFragmentFooter"></th:block>
+      </div>
+      <!--Q&A 영역 끝-->
+  </div>
+
+</html>

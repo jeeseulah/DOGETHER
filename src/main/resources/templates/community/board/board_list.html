@@ -1,0 +1,195 @@
+<html layout:decorate="~{layout/layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  <div layout:fragment="content">
+
+    <th:block th:replace="fragments/community_banner :: communityFragment"></th:block>
+      <!--게시판 영역 시작-->
+      <div id="board" class="container">
+        <!--검색창-->
+        <div class="p-3 my-5 bg-body-secondary rounded">
+        <form
+          class="g-2 row justify-content-end"
+          th:action="@{/community/board/board_list}"
+          method="get"
+        >
+            <div class="col-3">
+            <select class="form-select" id="searchOption" name="searchType">
+              <option
+                value="subject"
+                selected
+                th:selected="${searchType == 'subject'}"
+              >
+                제목
+              </option>
+              <option value="content" th:selected="${searchType == 'content'}">
+                내용
+              </option>
+              <option
+                value="subjectAndContent"
+                th:selected="${searchType == 'subjectAndContent'}"
+              >
+                제목+내용
+              </option>
+              <option value="name" th:selected="${searchType == 'name'}">
+                작성자
+              </option>
+            </select>
+          </div>
+          <div class="col-9 d-flex">
+            <label for="inputSearch" class="visually-hidden"
+              >검색어를 입력해주세요.</label
+            >
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                id="inputSearch"
+                name="kWord"
+                placeholder="검색어를 입력해주세요."
+                th:value="${kWord}"
+              />
+              <button
+                class="btn btn-secondary mx-2"
+                type="submit"
+                id="btnSearch"
+              >
+                <i class="bi bi-search"></i>
+              </button>
+            </div>
+          </div>
+          </form>
+        </div>
+        <!--글쓰기 버튼-->
+        <div class="d-flex justify-content-end" th:unless="${loginMember} == null">
+          <a th:href="@{/community/board/board_create}" role="button" class="btn btn-secondary mb-3">
+            <i class="bi bi-pencil"></i> 글쓰기
+          </a>
+        </div>
+      <form
+        th:action="@{/community/board/board_list}"
+        method="get"
+        id="searchForm"
+      >
+        <input type="hidden" id="kWord" name="kWord" th:value="${kWord}" />
+        <input
+          type="hidden"
+          id="page"
+          name="page"
+          th:value="${paging.number}"
+        />
+        <input
+          type="hidden"
+          id="searchType"
+          name="searchType"
+          th:value="${searchType}"
+        />
+      </form>
+        <!--total count-->
+        <div class="border-bottom border-3 pb-3">
+          <small><i class="bi bi-file-earmark"></i> Total 
+		  <span th:text="${paging.totalElements}">35</span> / 
+		  <span th:text="${paging.number + 1}">1</span> page</small>
+        </div>
+        <!--게시판 리스트-->
+        <div class="list-group list-group-flush" th:each="board , loop:${paging}">
+          <a class="list-group-item list-group-item-action border-bottom"
+             th:href="@{/community/board/board_detail/{boardid}(boardid=${board.getId()})}">
+              <div class="card border-0">
+                <div class="row g-0">
+                  <!--div class="col-3 col-md-2 d-flex justify-content-center align-items-center">
+                    <img
+                      src="../../images/recommend-sample1.jpg"
+                      class="img-fluid rounded"
+                      alt="게시판샘플이미지1"
+                    />
+                  </div-->
+                  <div class="col-9 col-md-10">
+                    <div class="card-body">
+                      <div class="card-title d-flex">
+                        <h5 class="fw-bold" th:text="${board.subject}">게시판페이지 제목입니다.</h5>
+                        <div class="badge text-black small ms-2" th:if="${#lists.size(board.commentList) > 0}">
+                          <span>+</span>
+                          <span th:text="${#lists.size(board.commentList)}"></span>
+                        </div>
+                      </div>
+                      <p class="card-text" th:text="${board.content}">
+                      </p>
+                      <p class="card-text" style="font-size: 12px;">
+                        <span class="text-body-dark" th:text="${board.member.name}">홍길동</span>
+                        <span class="text-body-secondary">  /  <i class="bi bi-eye-fill"></i></span>
+                        <span class="text-body-secondary" th:text="${board.views}">2</span>
+                        <span class="text-body-secondary">  /  <i class="bi bi-clock"></i></span>
+                        <span class="text-body-secondary" th:text="${#temporals.format(board.createDate,'yyyy-MM-dd a hh:mm')}">2024-05-17</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </a>
+        </div>
+        <!--글쓰기 버튼-->
+        <div class="d-flex justify-content-end border-top border-3" th:unless="${loginMember} == null">
+          <a th:href="@{/community/board/board_create}" role="button" class="btn btn-secondary mt-3">
+            <i class="bi bi-pencil"></i> 글쓰기
+          </a>
+        </div>
+        <!--page link-->
+        <div id="page-select" class="my-5 py-5">
+          <div th:if="${!paging.isEmpty()}">
+            <ul class="pagination pagination-sm justify-content-center">
+              <li class="page-item">
+              <a
+                class="page-link link-dark"
+                th:href="@{|?page=0&kWord=${kWord}&searchType=${searchType}|}"
+                th:classappend="${!paging.hasPrevious()}?'disabled'"
+              >
+                  <span>&laquo;</span>
+                </a>
+              </li>
+
+              <li class="page-item">
+              <a
+                class="page-link link-dark"
+                th:href="@{|?page=${paging.number -1}&kWord=${kWord}&searchType=${searchType}|}"
+                th:classappend="${!paging.hasPrevious()}?'disabled'"
+              >
+                  <span>이전</span>
+                </a>
+              </li>
+
+              <li class="page-item" th:each="page:${#numbers.sequence(0,paging.totalPages -1)}"
+                  th:if="${page >= paging.number -5 and page <= paging.number+5}">
+              <a
+                class="page-link link-dark"
+                th:href="@{|?page=${page}&kWord=${kWord}&searchType=${searchType}|}"
+                th:text="${page+1}"
+                th:classappend="${page==paging.number}?'active'"
+                >1</a
+              >
+              </li>
+
+              <li class="page-item">
+              <a
+                class="page-link link-dark"
+                th:href="@{|?page=${paging.number+1}&kWord=${kWord}&searchType=${searchType}|}"
+                th:classappend="${!paging.hasNext()}?'disabled'"
+              >
+                <span>다음</span></a
+              >
+              </li>
+
+              <li class="page-item">
+              <a
+                class="page-link link-dark"
+                th:href="@{|?page=${paging.totalPages -1}&kWord=${kWord}&searchType=${searchType}|}"
+                th:classappend="${!paging.hasNext()}?'disabled'"
+              >
+                  <span>&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!--게시판 영역 끝-->
+  </div>
+</html>

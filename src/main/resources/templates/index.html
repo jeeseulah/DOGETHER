@@ -1,0 +1,246 @@
+<html layout:decorate="~{layout/layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<script src="../static/javascript/index.js"></script>
+<div layout:fragment="content">
+        <!--슬라이드 영역 시작-->
+        <section id="slide-content">
+            <div id="slideIndicator" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button
+                            type="button"
+                            data-bs-target="#slideIndicator"
+                            data-bs-slide-to="0"
+                            class="active"
+                            aria-current="true"
+                            aria-label="Slide 1"
+                    ></button>
+                    <button
+                            type="button"
+                            data-bs-target="#slideIndicator"
+                            data-bs-slide-to="1"
+                            aria-label="Slide 2"
+                    ></button>
+                    <button
+                            type="button"
+                            data-bs-target="#slideIndicator"
+                            data-bs-slide-to="2"
+                            aria-label="Slide 3"
+                    ></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active" data-bs-interval="3000">
+                        <img
+                                src="/images/slide-img1.jpg"
+                                class="d-block w-100"
+                                alt="슬라이드 이미지1"
+                        />
+                    </div>
+                    <div class="carousel-item" data-bs-interval="3000">
+                        <img
+                                src="/images/slide-img2.jpg"
+                                class="d-block w-100"
+                                alt="슬라이드 이미지2"
+                        />
+                    </div>
+                    <div class="carousel-item" data-bs-interval="3000">
+                        <img
+                                src="/images/slide-img3.jpg"
+                                class="d-block w-100"
+                                alt="슬라이드 이미지3"
+                        />
+                    </div>
+                </div>
+                <button
+                        class="carousel-control-prev"
+                        type="button"
+                        data-bs-target="#slideIndicator"
+                        data-bs-slide="prev"
+                >
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button
+                        class="carousel-control-next"
+                        type="button"
+                        data-bs-target="#slideIndicator"
+                        data-bs-slide="next"
+                >
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </section>
+        <!--슬라이드 영역 끝-->
+        <!--프로젝트 소개 시작-->
+        <div id="introduce" class="text-center w-100 py-5">
+            <h2 class="fs-1 fw-bold">함께하개</h2>
+            <h3 class="text-secondary fs-4 fw-bold">
+                반려동물 동반 문화시설 "함께하개"
+            </h3>
+            <p class="centerBar"></p>
+            <p class="text-secondary mb-5">
+                <strong
+                >함께하개는 반려동물과 함께할 수 있는 다양한 문화시설을 제공하고,
+                    <br />
+                    이를 통해 사람들이 반려동물과 함께 시간을 보내는 것을 즐길 수 있도록
+                    돕는 것을 목표로 합니다.</strong
+                >
+                <br /><br />
+                이를 위해, 우리는 반려동물이 동반 가능한 카페, 병원, 약국 등 다양한
+                시설에 대한 정보를 제공하고 있습니다.
+            </p>
+        </div>
+        <!--프로젝트 소개 끝-->
+        <!--추천 리스트 시작-->
+        <div id="recommendlist" class="container py-5">
+            <h2 class="fs-1 fw-bold py-3">추천리스트</h2>
+            <div class="row mt-3 mb-5">
+                <div class="col-lg-6 col-sm-12">
+                    <!--병원추천 시작-->
+                    <div class="border border-1 rounded mt-3 p-4 pt-5">
+                        <div class="d-flex">
+                            <h2 class="fs-2 fw-bold">병원추천</h2>
+                            <button
+                                    type="button"
+                                    class="rounded-pill btn btn-outline-dark btn-sm my-3 ms-auto"
+                                    th:onclick="|location.href='@{/hospital/hospital}'|"
+                            >
+                                더보기
+                            </button>
+                        </div>
+                        <div id="hospitalRecommend" class="recommend-div">
+                        </div>
+                    </div>
+                    <!--병원추천 끝-->
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                    <!--약국추천 시작-->
+                    <div class="border border-1 rounded mt-3 p-4 pt-5">
+                        <div class="d-flex">
+                            <h2 class="fs-2 fw-bold">약국추천</h2>
+                            <button
+                                    type="button"
+                                    class="rounded-pill btn btn-outline-dark btn-sm my-3 ms-auto"
+                                    th:onclick="|location.href='@{/hospital/drugstore}'|"
+                            >
+                                더보기
+                            </button>
+                        </div>
+                        <div id="drugstoreRecommend" class="recommend-div">
+                        </div>
+                    </div>
+                    <!--약국추천 끝-->
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                  <!--용품점추천 시작-->
+                  <div class="border border-1 rounded mt-3 p-4 pt-5">
+                    <div class="d-flex">
+                      <h2 class="fs-2 fw-bold">용품점추천</h2>
+                      <button
+                        type="button"
+                        class="rounded-pill btn btn-outline-dark btn-sm my-3 ms-auto"
+                        th:onclick="|location.href='@{/puppyshop/puppyshop}'|"
+                      >
+                        더보기
+                      </button>
+                    </div>
+                    <div id="puppyshopRecommend" class="recommend-div">
+                    </div>
+                  </div>
+                  <!--용품점추천 끝-->
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                  <!--카페추천 시작-->
+                  <div class="border border-1 rounded mt-3 p-4 pt-5">
+                    <div class="d-flex">
+                      <h2 class="fs-2 fw-bold">카페추천</h2>
+                      <button
+                        type="button"
+                        class="rounded-pill btn btn-outline-dark btn-sm my-3 ms-auto"
+                        th:onclick="|location.href='@{/cafe/cafe}'|"
+                      >
+                        더보기
+                      </button>
+                    </div>
+                    <div id="cafeRecommend" class="recommend-div">
+                    </div>
+                  </div>
+                  <!--카페추천 끝-->
+            </div>
+        </div>
+        </div>
+        <!--추천 리스트 끝-->
+        <!--홈 배너 이미지-->
+        <div id="index-banner-img" class="py-5">
+          <div class="container text-white text-center">
+            <h3 class="fw-bold mb-3">PUPPYCODERS</h3>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores,
+              tempore.
+            </p>
+          </div>
+        </div>
+        <!--홈 배너 이미지 끝-->
+        <!--컨텐츠 영역 시작-->
+        <div id="contents" class="container">
+          <div class="row mt-5 mb-5 pb-5">
+            <div class="col-lg-6 col-sm-12">
+                <!--공지사항 시작-->
+                <div class="mt-3 p-4 pt-5">
+                    <div class="d-flex mb-5">
+                      <h2 class="fs-1 fw-bold">공지사항</h2>
+                      <a th:href="@{/community/notice/notice_list}" class="ms-auto mt-4">더보기 ></a>
+                    </div>
+                    <div>
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr th:each="notice : ${latestNotices}">
+                                    <td class="text-start">
+                                      <a th:href="@{/community/notice/notice_detail/{noticeid}(noticeid=${notice.getId()})}"
+                                        th:text="${notice.subject}">Lorem ipsum dolor sit amet.</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--공지사항 끝-->
+            </div>
+            <div class="col-lg-6 col-sm-12">
+                <!--Q&A 시작-->
+                <div class="mt-3 p-4 pt-5">
+                    <div class="d-flex mb-5">
+                        <h2 class="fs-1 fw-bold">Q&A</h2>
+                        <a th:href="@{/community/question/question_list}" class="ms-auto mt-4">더보기 ></a>
+                    </div>
+                    <div>
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr th:each="question : ${latestQuestions}">
+                                    <td>
+                                      <span class="badge text-bg-success" th:if="${#lists.size(question.answerList) > 0}">답변완료</span>
+                                        <span class="badge text-bg-warning" th:unless="${#lists.size(question.answerList) > 0}"> 미답변 </span>
+                                    </td>
+                                    <td class="text-end">
+                                      <a
+                                        th:href="@{/community/question/question_detail/{questionId}(questionId=${question.getId()})}"
+                                        th:text="${question.subject}"
+                                        >Lorem ipsum dolor sit amet.</a
+                                      >
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--Q&A 끝-->
+            </div>
+          </div>
+        </div>
+        <!--컨텐츠 영역 끝-->
+    <script
+      src="/javascript/index.js"
+      type="text/javascript"
+      th:src="@{/javascript/index.js}"
+    ></script>
+    </div>
+</html>

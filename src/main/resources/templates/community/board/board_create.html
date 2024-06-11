@@ -1,0 +1,68 @@
+<html layout:decorate="~{layout/layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  <div layout:fragment="content">
+
+    <th:block th:replace="fragments/community_banner :: communityFragment"></th:block>
+      <!--게시판 영역 시작-->
+      <div id="board-create" class="container">
+        <!--게시글 작성 폼-->
+        <form class="row g-3 p-5" th:object="${boardForm}" method="post">
+          <div class="col-md-6">
+            <span th:text="*{name}" class="form-control"></span>
+          </div>
+          <div class="col-md-6">
+            <span th:text="*{email}" class="form-control"></span>
+          </div>
+          <div class="col-12">
+            <div class="input-group">
+              <div class="input-group-text">
+                <i class="bi bi-chat-right-dots-fill text-secondary"></i>
+              </div>
+              <input type="text" class="form-control" placeholder="제목을 입력해 주세요." th:field="*{subject}"/>
+            </div>
+            <div class="field-error" th:errors="*{subject}"></div>
+          </div>
+          <div class="col-12">
+            <textarea
+              class="form-control"
+              placeholder="내용을 입력해 주세요."
+              rows="15"
+              th:field="*{content}"
+            ></textarea>
+            <div class="field-error" th:errors="*{content}"></div>
+          </div>
+          <!--div class="col-12">
+            <small class="fw-bold">이미지 파일 첨부</small>
+            <div class="input-group">
+              <input
+                type="file"
+                class="form-control"
+                id="inputGroupFile04"
+                aria-describedby="inputGroupFileAddon04"
+                aria-label="Upload"
+              />
+              <button
+                class="btn btn-outline-secondary"
+                type="button"
+                id="inputGroupFileAddon04"
+              >
+                Upload
+              </button>
+            </div>
+          </div-->
+
+          <!--목록, 글쓰기 버튼-->
+          <div class="d-flex justify-content-center my-5 pb-5">
+            <a
+                    th:href="@{/community/board/board_list}"
+                    role="button"
+                    class="btn btn-secondary px-4 mx-2"
+            >취소
+            </a>
+            <input type="submit" class="btn btn-dark px-4" value="작성완료">
+          </div>
+        </form>
+      </div>
+      <!--게시판 영역 끝-->
+
+  </div>
+</html>

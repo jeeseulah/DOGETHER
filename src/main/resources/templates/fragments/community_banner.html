@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <th:block th:fragment="communityFragment">
+        <!--커뮤니티 배너 시작-->
+        <div id="community-banner-img">
+            <div class="container text-white text-center py-5">
+                <h3 class="fs-1 fw-bold pt-5">커뮤니티</h3>
+                <p class="py-3">
+                    최신 소식을 접하고 다양한 주제와 의견을 나누고 소통해 보세요!
+                </p>
+            </div>
+        </div>
+        <!--커뮤니티 배너 끝-->
+        <!--커뮤니티 탭 시작-->
+        <div id="tab" class="container pb-4 mb-3">
+            <ul class="nav nav-underline nav-fill border-bottom">
+                <li class="nav-item">
+                    <a
+                            class="nav-link link-dark"
+                            th:href="@{/community/notice/notice_list}"
+                    >공지사항</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a
+                            class="nav-link link-dark"
+                            th:href="@{/community/board/board_list}"
+                    >게시판</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a
+                            class="nav-link link-dark"
+                            th:href="@{/community/question/question_list}"
+                    >Q&A</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a
+                            class="nav-link link-dark"
+                            th:href="@{/community/eventpage/event_list}"
+                    >이벤트</a
+                    >
+                </li>
+            </ul>
+        </div>
+        <!--커뮤니티 탭 끝-->
+    </th:block>
+</html>

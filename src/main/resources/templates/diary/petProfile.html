@@ -1,0 +1,49 @@
+<html layout:decorate="~{layout/layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<div  layout:fragment="content">
+    <section>
+        <section class="pt-5">
+            <div class="container pt-5 ">
+                <div class="col-10 mx-auto shadow">
+                    <div class="text-center mt-5">
+                        <div class="d-flex flex-column align-items-center bg-pet text-dark p-4 rounded shadow mb-3">
+                            <img src="/images/diary-dog000.jpg" width="23%" alt="강아지 이미지" class="img-fluid rounded-circle mb-3"/>
+                            <span class="fw-bold">프로필을 등록해보세요</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="mb-5 pb-5">
+            <div class="container">
+                <div class="row col-10 mx-auto">
+                    <div class="bg-pet d-flex mx-auto justify-content-evenly m-3  border border-2 shadow rounded-3" th:each="pet : ${pets}">
+                        <div class="col-6 mx-auto text-center align-content-center">
+                            <img th:src="${pet.imageUrl}" width="60%" alt="이미지" class="img-fluid rounded"/>
+                        </div>
+                        <div class="col-4 mx-auto mt-2 brownBoldText">
+                                <div class="profile-info">
+                                    <h5 class="fw-bold mb-3 mt-2">이름: <span th:text="${pet.name}"></span></h5>
+                                    <h5 class="fw-bold mb-3">품종: <span th:text="${pet.kinds}"></span></h5>
+                                    <h5 class="fw-bold mb-3">성별: <span th:text="${pet.gender}"></span></h5>
+                                    <h5 class="fw-bold mb-3">생년월일: <span th:text="${#dates.format(pet.birth, 'yyyy-MM-dd')}"></span></h5>
+                                    <h5 class="fw-bold mb-3 mt-2">소개: <span th:text="${pet.content}"></span></h5>
+                                </div>
+                                <div class="mb-3">
+                                    <a th:href="@{/pet/delete/{id}(id=${pet.id})}" type="button" class="btn btn-outline-dark btn-sm"><i class="bi bi-trash-fill"></i></a>
+                                </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-pet rounded p-5 text-center mt-5 mb-5 shadow">
+                        <a th:href="@{/petAdd}" class="btn btn btn-outline-dark btn-lg rounded-circle">
+                            <i class="bi bi-plus-lg"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+</html>

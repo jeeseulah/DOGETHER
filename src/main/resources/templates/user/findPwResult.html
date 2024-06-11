@@ -1,0 +1,14 @@
+<html layout:decorate="~{layout/layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<div layout:fragment="content">
+    <section id="loginSection" class="container w-25 justify-content-center my-5 py-5 ">
+        <form class="mt-5 border border-dark rounded-3 bg-loginform px-5 py-4 my-3" method="post" >
+            <legend class="text-center my-3 fs-3 fw-bold brownBoldText">비밀번호 찾기 결과</legend>
+            <div class="container mt-5 text-center">
+                <p class="fw-bold brownBoldText">비밀번호 : <span th:text="${password}"></span></p>
+                <p th:if="${message}" th:text="${message}"></p>
+                <a th:href="@{/user/findPwForm}" class="btn btn-brown bg-brown">다시 찾기</a>
+            </div>
+        </form>
+    </section>
+</div>
+</html>

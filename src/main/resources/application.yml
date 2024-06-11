@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: dogether
+  mvc:
+    pathmatch:
+      matching-strategy = ant_path_matcher:
+  datasource:
+    #url: jdbc:h2:tcp://localhost/~/testproj
+    #username: sa
+    #password:
+    #driver-class-name: org.h2.Driver
+      url: jdbc:mysql://localhost:3306/testproj?serverTimezone-UTC&characterEncoding=UTF-8
+      username: root
+      password: 1234
+      driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+  spring:
+    mvc:
+      pathmatch:
+        matching-strategy=ant_path_matcher:
+
+logging.level:
+  org.hibernate.SQL: debug
+  org.hibernate.orm.jdbc.bind: trace

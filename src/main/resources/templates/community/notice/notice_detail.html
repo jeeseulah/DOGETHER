@@ -1,0 +1,43 @@
+<html layout:decorate="~{layout/layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  <div layout:fragment="content">
+
+    <th:block th:replace="fragments/community_banner :: communityFragment"></th:block>
+      <!--공지사항 영역 시작-->
+      <div id="notice-detail" class="container">
+        <!--공지사항 글 제목-->
+        <div class="p-3 mt-5 border-bottom border-3">
+          <h2 class="fs-2 fw-bold" th:text="${notice.subject}">공지사항 글 제목입니다.</h2>
+          <div class="card-text text-body-secondary my-3" style="font-size: 13px">
+            <i class="bi bi-clock"></i> <span th:text="${#temporals.format(notice.createDate,'yyyy-MM-dd a hh:mm')}">2024-05-17</span>
+          </div>
+        </div>
+        <!--공지사항 글-->
+        <div class="border-bottom border-3 p-5">
+          <pre th:text="${notice.content}">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum
+            ipsum neque eaque ut maxime saepe minus. Dolore sint magni delectus
+            consequuntur explicabo. Voluptas quod fuga assumenda quis a quae
+            odit quas nisi omnis aliquid corrupti laborum cupiditate sunt
+            reprehenderit, corporis provident repudiandae officia tenetur! Modi
+            optio illo distinctio reiciendis animi?
+          </pre>
+        </div>
+        <!--수정 삭제 버튼-->
+        <div class="d-flex justify-content-end my-5" th:if="${loginAdmin != null}">
+          <a th:href="@{/community/notice/notice_modify/{noticeid}(noticeid=${notice.id})}" class="btn btn-secondary px-4 mx-2">수정</a>
+          <a th:href="@{/community/notice/notice_delete/{noticeid}(noticeid=${notice.id})}" class="btn btn-dark px-4">삭제</a>
+        </div>
+        <!--목록 버튼-->
+        <div class="d-flex justify-content-end my-5 pb-5">
+          <a
+            th:href="@{/community/notice/notice_list}"
+            role="button"
+            class="btn btn-secondary px-4"
+            >목록
+          </a>
+        </div>
+      </div>
+      <!--공지사항 영역 끝-->
+
+  </div>
+</html>

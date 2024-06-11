@@ -1,0 +1,26 @@
+<html layout:decorate="~{layout/layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<div  layout:fragment="content">
+    <div class="p-5 my-5  d-flex justify-content-center">
+        <div class="w-50 text-center justify-content-center py-5 my-5">
+            <h1>관리자 페이지</h1>
+            <div class="row d-flex justify-content-around">
+                <div class="col-3 p-2 my-3">
+                    <a th:href="@{/admin/memberList}" class="btn btn-brown p-2">
+                    회원목록
+                    </a>
+                </div>
+                <div class="col-3 p-2 my-3">
+                    <a th:href="@{/community/notice/notice_list}" class="btn btn-brown p-2">
+                    공지사항
+                    </a>
+                </div>
+                <div class="col-3 p-2 my-3">
+                    <a th:href="@{/community/question/question_list}" class="btn btn-brown p-2">
+                    Q&A
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

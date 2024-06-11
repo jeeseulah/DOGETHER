@@ -1,0 +1,189 @@
+<html layout:decorate="~{layout/layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  <div layout:fragment="content">
+
+    <th:block th:replace="fragments/community_banner :: communityFragment"></th:block>
+      <!--공지사항 영역 시작-->
+      <div id="notice" class="container">
+        <div class="p-3 my-5 bg-body-secondary rounded">
+        <form
+          class="g-2 row justify-content-end"
+          th:action="@{/community/notice/notice_list}"
+          method="get"
+        >
+          <div class="col-3">
+            <select class="form-select" id="searchOption" name="searchType">
+              <option
+                selected
+                value="subject"
+                th:selected="${searchType == 'subject'}"
+              >
+                제목
+              </option>
+              <option value="content" th:selected="${searchType == 'content'}">
+                내용
+              </option>
+              <option
+                value="subjectAndContent"
+                th:selected="${searchType == 'subjectAndContent'}"
+              >
+                제목+내용
+              </option>
+              </select>
+            </div>
+            <div class="col-9 d-flex">
+              <label for="inputSearch" class="visually-hidden"
+                >검색어를 입력해주세요.</label
+              >
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                id="inputSearch"
+                name="kWord"
+                th:value="${kWord}"
+                placeholder="검색어를 입력해주세요."
+              />
+              <button
+                class="btn btn-secondary mx-2"
+                type="submit"
+                id="btnSearch"
+              >
+                <i class="bi bi-search"></i>
+              </button>
+            </div>
+          </div>
+          </form>
+        </div>
+      <form
+        th:action="@{/community/notice/notice_list}"
+        method="get"
+        id="searchForm"
+      >
+        <input type="hidden" id="kWord" name="kWord" th:value="${kWord}" />
+        <input
+          type="hidden"
+          id="page"
+          name="page"
+          th:value="${paging.number}"
+        />
+        <input
+          type="hidden"
+          id="searchType"
+          name="searchType"
+          th:value="${searchType}"
+        />
+      </form>
+        <div class="my-5">
+          <table class="table table-hover caption-top text-center">
+            <caption>
+              <small><i class="bi bi-file-earmark"></i> Total <span th:text="${paging.totalElements}">35</span> / <span th:text="${paging.number + 1}">1</span> page</small>
+            </caption>
+            <thead class="table-light">
+              <tr>
+                <th class="hidden-table">번호</th>
+                <th class="hidden-table">구분</th>
+                <th>제목</th>
+                <th class="hidden-table">등록일</th>
+              </tr>
+            </thead>
+            <tbody class="table-group-divider">
+            <tr th:each="noticeList, pageIndex : ${paging}">
+              <td class="hidden-table">
+                <span
+                  th:text="${paging.getTotalElements - (paging.number * paging.size) - pageIndex.index}"
+                ></span>
+              </td>
+              <td class="hidden-table">
+                <span>공지</span>
+              </td>
+              <td>
+                <a
+                  th:href="@{|/community/notice/notice_detail/${noticeList.id}|}"
+                  th:text="${noticeList.subject}"
+                  >함께하개 이용약관 및 개인정보처리방침 개정 안내</a
+                >
+              </td>
+              <td class="hidden-table">
+                <small
+                  th:text="${#temporals.format(noticeList.createDate, 'yyyy-MM-dd')}"
+                  >2024-05-17</small
+                >
+              </td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      <div
+        class="d-flex justify-content-end border-top border-3"
+        th:if="${loginAdmin != null}"
+      >
+        <a
+          th:href="@{/community/notice/notice_create}"
+          role="button"
+          class="btn btn-secondary mt-3"
+        >
+          <i class="bi bi-pencil"></i> 글쓰기
+        </a>
+      </div>
+      <div id="page-select" class="my-5 py-5" th:if="${!paging.isEmpty()}">
+        <ul class="pagination pagination-sm justify-content-center">
+          <li class="page-item">
+            <a
+                    class="page-link link-dark"
+                    th:href="@{|?page=0&kWord=${kWord}&searchType=${searchType}|}"
+                    th:classappend="${!paging.hasPrevious()}?'disabled'"
+            >
+              <span>&laquo;</span>
+            </a>
+          </li>
+
+          <li class="page-item">
+            <a
+                    class="page-link link-dark"
+                    th:href="@{|?page=${paging.number -1}&kWord=${kWord}&searchType=${searchType}|}"
+                    th:classappend="${!paging.hasPrevious()}?'disabled'"
+            >
+              <span>이전</span>
+            </a>
+          </li>
+
+          <li
+                  class="page-item"
+                  th:each="page:${#numbers.sequence(0,paging.totalPages -1)}"
+                  th:if="${page >= paging.number -5 and page <= paging.number+5}"
+          >
+            <a
+                    class="page-link link-dark"
+                    th:href="@{|?page=${page}&kWord=${kWord}&searchType=${searchType}|}"
+                    th:text="${page+1}"
+                    th:classappend="${page==paging.number}?'active'"
+            >1</a
+            >
+          </li>
+
+          <li class="page-item">
+            <a
+                    class="page-link link-dark"
+                    th:href="@{|?page=${paging.number+1}&kWord=${kWord}&searchType=${searchType}|}"
+                    th:classappend="${!paging.hasNext()}?'disabled'"
+            >
+              <span>다음</span></a
+            >
+          </li>
+
+          <li class="page-item">
+            <a
+                    class="page-link link-dark"
+                    th:href="@{|?page=${paging.totalPages -1}&kWord=${kWord}&searchType=${searchType}|}"
+                    th:classappend="${!paging.hasNext()}?'disabled'"
+            >
+              <span>&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!--공지사항 영역 끝-->
+  </div>
+</html>

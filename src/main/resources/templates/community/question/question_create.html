@@ -1,0 +1,97 @@
+<html layout:decorate="~{layout/layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  <div layout:fragment="content">
+
+    <th:block th:replace="fragments/community_banner :: communityFragment"></th:block>
+
+      <!--Q&A 영역 시작-->
+      <div id="question-create">
+        <div class="container">
+          <!--게시글 작성 폼-->
+          <form class="row g-3 p-5" th:object="${questionForm}" method="post">
+            <div class="col-md-6">
+              <span th:text="*{name}" class="form-control"></span>
+            </div>
+            <div class="col-md-6">
+              <span th:text="*{email}" class="form-control"></span>
+            </div>
+            <div class="col-12">
+              <div class="input-group">
+                <div class="input-group-text">
+                  <i class="bi bi-telephone-fill text-secondary"></i>
+                </div>
+                <span th:text="*{tel}" class="form-control"></span>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="input-group">
+                <div class="input-group-text">
+                  <i class="bi bi-chat-right-dots-fill text-secondary"></i>
+                </div>
+                <input type="text" class="form-control" placeholder="제목을 입력해 주세요." th:field="*{subject}"/>
+              </div>
+              <div class="field-error" th:errors="*{subject}"></div>
+            </div>
+            <div class="col-12">
+              <textarea
+                class="form-control"
+                placeholder="내용을 입력해 주세요."
+                rows="15"
+                th:field="*{content}"
+              ></textarea>
+              <div class="field-error" th:errors="*{content}"></div>
+            </div>
+            <div class="col-12">
+              <div class="input-group" id ="passwordChecked">
+                <div class="input-group-text">
+                  비밀글
+                  <input
+                    class="form-check-input mt-0 mx-1"
+                    type="checkbox"
+                    value=""
+                    th:field="*{isShow}"
+                  />
+                </div>
+                <input
+                  type="password"
+                  class="form-control"
+                  placeholder="비밀번호 설정"
+                  th:field="*{password}"
+                />
+              </div>
+              <div class="field-error" th:if="*{isShow}" th:errors="*{password}"></div>
+            </div>
+            <div class="form-check d-flex justify-content-center pt-5">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                name ="agree"
+                value="true"
+                id="isAgreeChecked"
+                th:field="*{isAgree}"
+              />
+              <label class="form-check-label px-2" for="isAgreeChecked">
+                개인정보처리방침에 동의합니다.
+              </label>
+              <!--div class="field-error" th:errors="*{isAgree}"></div-->
+            </div>
+
+            <!--목록, 글쓰기 버튼-->
+            <div class="d-flex justify-content-center mb-5 pb-5">
+              <a
+                      th:href="@{/community/question/question_list}"
+                      role="button"
+                      class="btn btn-secondary px-4 mx-2"
+              >취소
+              </a>
+              <input id="completeBtn" type="submit" class="btn btn-dark px-4" value="작성완료">
+            </div>
+          </form>
+
+        </div>
+        <!--고객센터-->
+        <th:block th:replace="fragments/community_footer :: communityFragmentFooter"></th:block>
+      </div>
+      <!--Q&A 영역 끝-->
+
+  </div>
+</html>

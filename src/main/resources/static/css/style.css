@@ -1,0 +1,298 @@
+@charset "utf-8";
+@import url("https://fonts.googleapis.com/css2?family=Gugi&family=Noto+Sans+KR:wght@100..900&display=swap");
+
+/*공통************************************************************/
+body {
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+li {
+  list-style: none;
+}
+
+.field-error {
+  border-color : #dc3545;
+  color : #dc3545;
+}
+
+.bg-brown {
+  background-color: rgba(153, 129, 100, 0.95);
+}
+
+@media screen and (max-width: 768px) {
+  .hidden-table {
+    display: none;
+  }
+}
+
+/*네비게이션*/
+.nav-link:hover,
+.nav-link.active {
+  color: rgb(114, 33, 33) !important;
+}
+
+#nav {
+  height: 70px;
+}
+
+@media screen and (max-width: 768px) {
+  #nav-menu {
+    background-color: #fff;
+    padding: 30px;
+  }
+  #nav-menu ul li {
+    text-align: center;
+    width: 80px;
+  }
+}
+
+/*푸터**/
+footer {
+  background-color: rgba(86, 51, 9, 0.6);
+  font-size: 14px;
+}
+footer span {
+  font-size: 13px;
+}
+footer img {
+  opacity: 0.5;
+}
+
+@media screen and (max-width: 768px) {
+  #footer,
+  #footer span {
+    font-size: 11px;
+  }
+}
+@media screen and (max-width: 576px) {
+  #footer {
+    font-size: 10px;
+  }
+}
+
+/*index 페이지 *****************************************************/
+/*슬라이드*/
+#slide-content {
+  margin: 70px auto;
+  mask-image: linear-gradient(#000 80%, transparent);
+}
+.carousel {
+  max-height: 80vh;
+}
+
+/*소개글*/
+.centerBar {
+  width: 100px;
+  height: 5px;
+  background: #ddd;
+  margin: 30px auto;
+}
+
+/*추천리스트*/
+#recommendlist .card:hover {
+  background-color: rgba(172, 134, 134, 0.2);
+}
+/*.card img:hover {
+  opacity: 0.5;
+}*/
+
+/*홈 배너 이미지*/
+#index-banner-img {
+  background-image: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.8),
+      rgba(0, 0, 0, 0.2)
+    ),
+    url("../images/less-bg.jpg");
+  background-size: cover; /*이미지 사이즈 full로 나오도록*/
+  background-position: center top; /*윈도우 사이즈를 줄였을 때 중심으로*/
+  background-attachment: fixed; /*붙박이 처럼 붙이기*/
+}
+
+/*공지사항, Q&A*/
+#contents a:hover {
+  font-weight: bold;
+}
+
+/* 추천 div 스타일 *******/
+/*.recommend-div {
+  height: 703px;
+}*/
+/*병원 페이지 *******************************************************/
+/* 지환 스타일 */
+.max1200 {
+  width: 1200px;
+}
+
+#hospitalMain section {
+  display: block;
+}
+
+.infoPic {
+  border-radius: 20px;
+}
+
+/* 헤더 마진 (navbar)*/
+#hospitalHeader {
+  margin-top: 74px;
+}
+
+/*내정보 페이지 *****************************************************/
+.myInfo-bg {
+  background-color: rgb(153, 129, 100);
+  /*height: 60vh;*/
+}
+
+#my-info .myInfo {
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+/*커뮤니티 페이지 ***************************************************/
+/*커뮤니티 공통*/
+#community-banner-img {
+  margin: 70px auto;
+}
+
+#community-banner-img {
+  background-image: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0.6)
+    ),
+    url("../images/community-bg.jpg");
+  background-size: cover; /*이미지 사이즈 full로 나오도록*/
+  background-position: center; /*윈도우 사이즈를 줄였을 때 중심으로*/
+}
+
+#page-select .page-link.active {
+  background-color: rgba(86, 51, 9, 0.5);
+  border: 1px solid gray;
+}
+
+/*공지사항*/
+#notice tbody td:nth-child(3) {
+  text-align: start;
+}
+
+/*게시판*/
+#board img {
+  width: 120px;
+  height: 120px;
+}
+#board .card:hover {
+  background-color: rgba(172, 134, 134, 0.2);
+}
+#board .card-title:hover {
+  font-weight: bold;
+}
+#board .card-text {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow : hidden;
+}
+#board-detail .card {
+  background-color: #f8fafb;
+}
+
+/*문의사항*/
+#question tbody td:nth-child(2) {
+  text-align: start;
+}
+
+#question-detail .card {
+  background-color: #f8fafb;
+}
+
+/*이벤트*/
+#eventpage .card:hover {
+  opacity: 0.7;
+}
+
+/*slider*/
+#eventpage .post-slider {
+  width: 100%;
+  margin: 0px auto;
+  position: relative;
+}
+#eventpage .post-slider .next {
+  position: absolute;
+  top: 50%;
+  right: 0px;
+  font-size: 2em;
+  color: gray;
+  cursor: pointer;
+}
+#eventpage .post-slider .prev {
+  position: absolute;
+  top: 50%;
+  left: 0px;
+  font-size: 2em;
+  color: gray;
+  cursor: pointer;
+}
+#eventpage .post-slider .post-wrapper {
+  width: 84%;
+  margin: 0px auto;
+  overflow: hidden;
+  padding: 10px 0px 10px 0px;
+}
+#eventpage .post-slider .post-wrapper .post {
+  margin: 0px 10px;
+}
+
+/********** 로그인 css ***********/
+
+.bg-loginform {
+  background-color: rgba(153, 129, 100, 0.3);
+  width: 400px;
+}
+
+@media screen and (max-width: 768px) {
+  .bg-loginform {
+    width: 350px;
+  }
+}
+
+.loginLink-Group a {
+  color: rgba(153, 129, 100, 0.95);
+}
+
+.loginLink-Group a:hover {
+  color: rgb(114, 33, 33);
+}
+
+.btn-brown {
+  background-color: rgba(153, 129, 100, 0.95);
+  color: #fff;
+}
+
+.btn-brown:hover {
+  background-color: rgba(114, 33, 33, 0.85);
+  color: #fff;
+}
+
+.brownBoldText {
+  color: rgba(117, 99, 76, 0.99);
+}
+
+/********** 펫 css ***********/
+
+.bg-pet{
+  background-color: rgba(153, 129, 100, 0.3);
+}
+
+.bg-pet1{
+  background-color: rgba(153, 129, 100, 0.6);
+}
+
+#map {
+  /*width: 64vw;*/
+  height: 36vw;
+}

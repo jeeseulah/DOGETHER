@@ -1,0 +1,47 @@
+<html layout:decorate="~{layout/layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  <div layout:fragment="content">
+    <section
+      id="loginSection"
+      class="container my-5 py-5 d-flex justify-content-center"
+    >
+      <form class="rounded-3 bg-loginform p-4 shadow" method="post" th:object="${loginForm}">
+        <legend class="text-center my-3 fs-3 fw-bold brownBoldText">Login</legend>
+        <div class="mb-3 pt-3">
+          <input type="email" class="form-control"
+                 th:field="*{loginId}"
+                 th:errorclass="field-error"
+                 placeholder="Email" />
+          <div class="field-error" th:errors="*{loginId}"></div>
+        </div>
+
+        <div class="my-3">
+          <input
+            type="password"
+            class="form-control"
+            th:field="*{password}"
+            th:errorclass="field-error"
+            placeholder="Password"
+          />
+          <div class="field-error" th:errors="*{password}"></div>
+        </div>
+
+        <div th:if="${#fields.hasGlobalErrors()}">
+          <div th:each="err : ${#fields.globalErrors()}" class="text-danger text-center" th:text="${err}"></div>
+        </div>
+
+        <div class="my-4 d-flex justify-content-center">
+          <div class="my-4">
+            <ul class="px-0 loginLink-Group d-flex justify-content-evenly">
+              <li><a th:href="@{/add}"  class="px-2 fw-bold"><small>회원가입</small></a></li>
+              <li><a th:href="@{/user/findIdForm}" class="px-2 fw-bold"><small>아이디찾기</small></a></li>
+              <li><a th:href="@{/user/findPwForm}" class="px-2 fw-bold"><small>비밀번호찾기</small></a></li>
+            </ul>
+          </div>
+          <div class="px-2 my-4 d-flex justify-content-center">
+            <button type="submit" class="btn btn-brown w-100">Login</button>
+          </div>
+        </div>
+      </form>
+    </section>
+  </div>
+</html>

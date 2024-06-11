@@ -1,0 +1,114 @@
+<html layout:decorate="~{layout/layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<div  layout:fragment="content">
+
+    <section class="pt-5">
+        <div class="container pt-5">
+            <div class="col-10 mx-auto shadow">
+                <div class="text-center mt-5">
+                    <div class="d-flex flex-column align-items-center bg-pet text-dark p-4 rounded shadow">
+                        <img src="/images/diary-dog000.jpg" width="23%" alt="강아지 이미지" class="img-fluid rounded-circle"/>
+                        <span class="mt-3 fw-bold">오늘 하루를 기록해보세요</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container pt-5">
+        <div class="col-10 mx-auto">
+            <div th:each="diary : ${diaryList}" class="bg-pet shadow rounded mt-3 px-3 py-3 p-5 mb-5">
+                <div>
+                    <h5 class="brownBoldText fw-bold" th:text="${diary.subject}">제목</h5>
+                </div>
+
+                <div class="text-end my-3">
+                    <!--<button type="button" class="btn btn btn-outline-dark btn-sm"><i class="bi bi-card-list"></i></button>-->
+
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn btn-outline-dark btn-sm" data-bs-toggle="modal" th:attr="data-bs-target='#staticBackdrop' + ${diary.id}">
+                        <i class="bi bi-card-list"></i>
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" th:id="staticBackdrop + ${diary.id}"  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="bg-pet1 modal-header">
+                                    <h1 class="brownBoldText fw-bold modal-title fs-5" th:attr="id='staticBackdropLabel' + ${diary.id}"><span th:text="${diary.subject}"></span></h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="bg-pet modal-body text-start brownBoldText fw-bold">
+                                    <p>[활동기록]  </p>
+                                    <p><span th:text="${diary.content}"></span></p>
+                                    <p class="mt-5">[식사기록]  </p>
+                                    <p><span th:text="${diary.meal}"></span></p>
+                                    <p class="mt-5">[특이사항]  </p>
+                                    <p><span th:text="${diary.note}"></span></p>
+                                </div>
+                                <div class="bg-pet modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a th:href="@{/diary/delete/{id}(id=${diary.id})}" type="button" class="btn btn-outline-dark btn-sm"><i class="bi bi-trash-fill"></i></a>
+                </div>
+
+                <div class="text-end">
+                    <span class="brownBoldText fw-bold" th:text="${#dates.format(diary.doDate, 'yyyy-MM-dd')}">날짜</span>
+                </div>
+
+            </div>
+
+            <div class="text-end my-2 pb-5">
+                <div class="mt-5 mb-5">
+                    <!-- Trigger Button -->
+                    <button type="button" class="btn btn btn-outline-dark rounded-circle" data-bs-toggle="modal" data-bs-target="#menuModal">
+                        <i class="bi bi-pencil-square"></i>
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="menuModal" tabindex="-1" aria-labelledby="menuModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="menuModalLabel">내용 추가</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+
+                                <div class="modal-body text-start fw-bold">
+                                    <div class="container">
+                                        <form id="diaryForm" th:action="@{/diary}" th:object="${diaryForm}" method="post">
+                                            <label th:for="content" class="mt-3">제목</label>
+                                            <input type="text" class="form-control p-2 mt-1" th:field="*{subject}" placeholder="제목" />
+
+                                            <label th:for="content" class="mt-3">날짜</label>
+                                            <input type="date" class="form-control mt-3" th:for="doDate" th:field="*{doDate}" placeholder="날짜">
+
+                                            <label th:for="content" class="mt-3">활동기록</label>
+                                            <textarea rows="4" class="form-control" th:field="*{content}" placeholder="오늘은 무슨 일이 있었나요?"></textarea>
+
+                                            <label th:for="meal" class="mt-3">식사기록</label>
+                                            <textarea rows="4" class="form-control" th:field="*{meal}" placeholder="무엇을 먹었나요?"></textarea>
+
+                                            <label th:for="note" class="mt-3">특이사항</label>
+                                            <textarea rows="4" class="form-control" th:field="*{note}" placeholder="특이사항이 있었나요?"></textarea>
+
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-secondary">작성완료</button>
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+</html>

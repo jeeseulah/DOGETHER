@@ -1,0 +1,114 @@
+<!--hospital.html-->
+
+<html
+        layout:decorate="~{layout/layout}"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<div layout:fragment="content">
+
+  <header id="hospitalHeader" class="text-start bg-secondary-subtle">
+    <div class="container py-5">
+      <h4>카페 정보</h4>
+      <p class="text-muted">우리 동물 카페에서는 사랑스러운 반려동물들과 함께 <br>편안하고 즐거운 시간을 보낼 수 있습니다!</p>
+    </div>
+  </header>
+  <!-- 메인 컨텐츠 시작-->
+  <div class="container">
+    <main id="hospitalMain" class="row justify-content-center my-5">
+      <!-- 카페 정보 시작-->
+      <section class="hospitalInfo card p-3">
+        <div class="row g-0">
+          <!-- 카페 정보 사진 시작 -->
+          <div class="col-md-6">
+            <div>
+              <div class="infoPicture">
+                <img
+                        id="cafeImage"
+                        src="../../images/section_hospitalInfo.png"
+                        alt="카페 정보"
+                        class="img-fluid"
+                />
+              </div>
+            </div>
+          </div>
+          <!-- 카페 정보 사진 끝 -->
+          <!-- 카페 정보 설명 시작 -->
+          <div class="col-md-6">
+            <div class="card-body mx-5">
+              <div class="infoString">
+                <h1 class="card-title display-4 fw-bold infoTitle my-5" id="facilityName">시설명</h1>
+                <div class="card-text fs-5 text-muted infoText">
+                  <p id="operateTime">operateTime</p>
+                  <p id="dayOff">dayOff</p>
+                  <p id="tel">tel</p>
+                  <p id="roadAddress">roadAddress</p>
+                  <p id="parking">parking</p>
+                  <p id="petSize">petSize</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 카페 정보 설명 끝 -->
+        </div>
+      </section>
+      <!-- 카페 정보 끝-->
+      <section class="hospitalSearch">
+        <div class="mt-5 pt-3">
+          <div class="mb-3">
+            <h4 class="fw-bold">동물 카페 목록</h4>
+          </div>
+          <form>
+            <div class="row mb-3">
+              <div class="col-md-4 col-12">
+                <select class="form-select form-control my-1" id="siDo">
+                  <option selected>시/도</option>
+                  <option value="강원도">강원도</option>
+                  <option value="경기도">경기도</option>
+                  <option value="경상북도">경상북도</option>
+                  <option value="경상남도">경상남도</option>
+                  <option value="광주광역시">광주광역시</option>
+                  <option value="대구광역시">대구광역시</option>
+                  <option value="대전광역시">대전광역시</option>
+                  <option value="부산광역시">부산광역시</option>
+                  <option value="서울특별시">서울특별시</option>
+                  <option value="충청북도">충청북도</option>
+                  <option value="충청남도">충청남도</option>
+                  <option value="제주특별자치도">제주특별자치도</option>
+                  <option value="전라북도">전라북도</option>
+                  <option value="전라남도">전라남도</option>
+                  <option value="인천광역시">인천광역시</option>
+                  <option value="울산">울산</option>
+                  <option value="세종특별자치시">세종특별자치시</option>
+                </select>
+              </div>
+              <div class="col-md-4 col-12">
+                <select class="form-select form-control my-1" id="siGunGu">
+                  <option selected>시/군/구</option>
+                </select>
+              </div>
+              <div class="col-md-4 col-12">
+                <select class="form-select form-control my-1" id="dongEub">
+                  <option selected>동/읍/면</option>
+                </select>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="row my-3">
+          <div class="col result">
+            <div class="list-group" id="result"></div>
+          </div>
+        </div>
+      </section>
+      <!--hr class="my-2" />
+      <h2 class="my-3">지도</h2-->
+      <section id="mapSection" class="mt-3 mb-5">
+        <div id="map" class="mb-5"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/javascript/cafe.js" type="text/javascript" th:src="@{/javascript/cafe.js}"></script>
+</div>
+</html>

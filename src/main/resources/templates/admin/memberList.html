@@ -1,0 +1,42 @@
+<html layout:decorate="~{layout/layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<div  layout:fragment="content">
+    <div class="my-5 p-5 d-flex justify-content-center">
+    <table class="table my-5 w-75 text-center">
+        <thead>
+        <tr class="bg-brown text-light">
+            <th scope="col">번호</th>
+            <th scope="col">아이디</th>
+            <th scope="col">비밀번호</th>
+            <th scope="col">회원 이름</th>
+            <th scope="col">전화번호</th>
+            <th scope="col">주소</th>
+            <th scope="col">개인처리정보동의</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="member : ${members}">
+            <td th:text="${member.id}">id</td>
+            <td th:text="${member.loginId}">loginId</td>
+            <td th:text="${member.password}">password</td>
+            <td th:text="${member.name}">name</td>
+            <td th:text="${member.tel}">tel</td>
+            <td th:text="${member.address}">address</td>
+            <td th:text="${member.isAgree}">isAgree</td>
+            <td>
+                <a th:href="@{/admin/memberList/{memberId}/edit(memberId=${member.id})}"
+                   class="btn btn-brown"
+                   >수정</a>
+            </td>
+            <td>
+                <a th:href="@{/admin/memberList/{memberId}/delete(memberId=${member.id})}"
+                   class="btn btn-brown"
+                >삭제</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+</html>
