@@ -34,10 +34,12 @@
         <label class="form-label fw-bold brownBoldText" th:for="address">주소</label>
         <input type="text" th:field="*{address}" class="form-control">
     </div>
-    <div class="mb-3">
-        <label class="form-label fw-bold brownBoldText" th:for="tel">전화번호</label>
-        <input type="tel" th:field="*{tel}" class="form-control">
-    </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold brownBoldText" th:for="tel">전화번호 <div th:if="${#fields.hasErrors('tel')}" th:errors="*{tel}"></div></label>
+                    <input type="text" th:field="*{tel}" class="form-control" th:errorclass="field-error">
+                    <div class="field-error" th:error="*{tel}"></div>
+                </div>
 
     <div class="my-2 d-flex justify-content-center">
         <label class="fw-bold brownBoldText"><input type="checkbox" th:field="*{isAgree}" value="true"/></label>
