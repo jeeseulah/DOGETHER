@@ -1,6 +1,6 @@
 <html layout:decorate="~{layout/layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<script src="../static/javascript/index.js"></script>
-<div layout:fragment="content">
+    <script src="../static/javascript/index.js"></script>
+    <div layout:fragment="content">
         <!--슬라이드 영역 시작-->
         <section id="slide-content">
             <div id="slideIndicator" class="carousel slide" data-bs-ride="carousel">
@@ -194,7 +194,7 @@
                         <table class="table table-hover">
                             <tbody>
                                 <tr th:each="notice : ${latestNotices}">
-                                    <td class="text-start">
+                                    <td class="text-start subject-text">
                                       <a th:href="@{/community/notice/notice_detail/{noticeid}(noticeid=${notice.getId()})}"
                                         th:text="${notice.subject}">Lorem ipsum dolor sit amet.</a>
                                     </td>
@@ -221,11 +221,15 @@
                                         <span class="badge text-bg-warning" th:unless="${#lists.size(question.answerList) > 0}"> 미답변 </span>
                                     </td>
                                     <td class="text-end">
-                                      <a
-                                        th:href="@{/community/question/question_detail/{questionId}(questionId=${question.getId()})}"
-                                        th:text="${question.subject}"
-                                        >Lorem ipsum dolor sit amet.</a
-                                      >
+                                        <a th:href="@{/community/question/question_detail/{questionid}(questionid=${question.getId()})}"
+                                           th:if="${question.isShow == false}"
+                                           th:text="${question.subject}">Q&A제목</a>
+                                        <a th:href="@{/community/question/question_pwd/{questionid}(questionid=${question.getId()})}"
+                                           th:if="${question.isShow != false and loginAdmin == null} "
+                                           th:text="${question.subject}">Q&A제목</a>
+                                        <a th:href="@{/community/question/question_detail/{questionid}(questionid=${question.getId()})}"
+                                           th:if="${question.isShow != false and loginAdmin != null}"
+                                           th:text="${question.subject}">Q&A제목</a>
                                     </td>
                                 </tr>
                             </tbody>

@@ -23,7 +23,7 @@ li {
   background-color: rgba(153, 129, 100, 0.95);
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   .hidden-table {
     display: none;
   }
@@ -39,13 +39,12 @@ li {
   height: 70px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   #nav-menu {
     background-color: #fff;
     padding: 30px;
   }
   #nav-menu ul li {
-    text-align: center;
     width: 80px;
   }
 }
@@ -62,13 +61,13 @@ footer img {
   opacity: 0.5;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   #footer,
   #footer span {
     font-size: 11px;
   }
 }
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 575px) {
   #footer {
     font-size: 10px;
   }
@@ -93,9 +92,9 @@ footer img {
 }
 
 /*추천리스트*/
-#recommendlist .card:hover {
-  background-color: rgba(172, 134, 134, 0.2);
-}
+/*#recommendlist .card:hover {*/
+/*  background-color: rgba(172, 134, 134, 0.2);*/
+/*}*/
 /*.card img:hover {
   opacity: 0.5;
 }*/
@@ -118,10 +117,6 @@ footer img {
   font-weight: bold;
 }
 
-/* 추천 div 스타일 *******/
-/*.recommend-div {
-  height: 703px;
-}*/
 /*병원 페이지 *******************************************************/
 /* 지환 스타일 */
 .max1200 {
@@ -205,7 +200,12 @@ footer img {
 #question tbody td:nth-child(2) {
   text-align: start;
 }
-
+#question .subject-text {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow : hidden;
+  word-break: break-all;
+}
 #question-detail .card {
   background-color: #f8fafb;
 }
@@ -218,13 +218,13 @@ footer img {
 /*slider*/
 #eventpage .post-slider {
   width: 100%;
-  margin: 0px auto;
+  margin: 0 auto;
   position: relative;
 }
 #eventpage .post-slider .next {
   position: absolute;
   top: 50%;
-  right: 0px;
+  right: 0;
   font-size: 2em;
   color: gray;
   cursor: pointer;
@@ -232,19 +232,19 @@ footer img {
 #eventpage .post-slider .prev {
   position: absolute;
   top: 50%;
-  left: 0px;
+  left: 0;
   font-size: 2em;
   color: gray;
   cursor: pointer;
 }
 #eventpage .post-slider .post-wrapper {
   width: 84%;
-  margin: 0px auto;
+  margin: 0 auto;
   overflow: hidden;
-  padding: 10px 0px 10px 0px;
+  padding: 10px 0 10px 0;
 }
 #eventpage .post-slider .post-wrapper .post {
-  margin: 0px 10px;
+  margin: 0 10px;
 }
 
 /********** 로그인 css ***********/

@@ -44,7 +44,6 @@ public class LoginService {
         return null;
     }
 
-    // 오버라이딩으로 가능
     public Optional<Member> findOne(String memberLoginId) {
         return memberRepository.findByLoginId(memberLoginId);
     }

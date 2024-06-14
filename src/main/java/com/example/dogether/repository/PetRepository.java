@@ -8,6 +8,5 @@ import java.util.List;
 
 @Repository
 public interface PetRepository extends JpaRepository<Pet, Long> {
-    //멤버별로 프로필 분류
     List<Pet> findByMemberId(Long memberId);
 }

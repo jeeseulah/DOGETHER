@@ -29,7 +29,7 @@ function initMap() {
             const itemsToShow = data.slice(0, 3);
             $.each(itemsToShow, function (index, item) {
               recommendElement.append(`
-              <a href="#" class="card mb-3 border border-0">
+              <dic class="card mb-3 border border-0">
                 <div class="row g-0">
                   <div class="col-sm-12 col-md-4 d-flex justify-content-center item-element"
                         data-lat="${item.lat}" data-lng="${item.lng}"
@@ -52,7 +52,7 @@ function initMap() {
                         </div>
                     </div>
                   </div>
-                </a>
+                </dic>
             `);
               // 업데이트 콜백 실행
               updateImageCallback(index, item.facility_name, recommendElement.attr('id'));

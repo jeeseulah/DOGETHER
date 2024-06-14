@@ -26,7 +26,7 @@ public class HospitalController {
         model.addAttribute("loginMember", loginMember);
         model.addAttribute("loginAdmin", loginAdmin);
 
-        return "/hospital/hospital";
+        return "hospital/hospital";
     }
 
     //약국페이지
@@ -37,6 +37,6 @@ public class HospitalController {
         model.addAttribute("loginMember", loginMember);
         model.addAttribute("loginAdmin", loginAdmin);
 
-        return "/hospital/drugstore";
+        return "hospital/drugstore";
     }
 }

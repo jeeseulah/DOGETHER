@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 @Controller
 @RequiredArgsConstructor
-public class EventpageController {
+public class EventPageController {
 
     //이벤트페이지
-    @GetMapping("/community/eventpage/event_list")
+    @GetMapping("/community/eventPage/event_list")
     public String eventListForm(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember
             ,@SessionAttribute(name = SessionConst.LOGIN_ADMIN, required = false) Admin loginAdmin
             , Model model) {
@@ -21,6 +21,6 @@ public class EventpageController {
         model.addAttribute("loginMember", loginMember);
         model.addAttribute("loginAdmin", loginAdmin);
 
-        return "/community/eventpage/event_list";
+        return "community/eventPage/event_list";
     }
 }

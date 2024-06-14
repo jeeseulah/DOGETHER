@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/images/favicon.ico}"/>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>함께하게</title>
+    <title>함께하개</title>
 
     <!-- api -->
 <!--    <script-->
@@ -56,196 +57,196 @@
 
 </head>
 <body>
-<div id="wrap">
-    <!--네비게이션 영역 시작-->
-    <nav id="nav" class="navbar navbar-expand-md fixed-top w-100">
-        <div class="container">
-            <!--네비로고-->
-            <a class="navbar-brand me-4" th:href="@{/}">
-                <img src="/images/mainlogo.png" alt="메인로고" />
-            </a>
-            <!--햄버거 버튼-->
-            <button
-                    class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#nav-menu"
-                    aria-controls="nav-menu"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-            >
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <!--네비게이션 메뉴-->
-            <div class="collapse navbar-collapse nav-underline" id="nav-menu">
-                <ul class="order-md-last navbar-nav my-2" style="font-size: 14px">
-                    <li class="nav-item">
-                        <a class="nav-link" th:if="${loginMember == null and loginAdmin == null}" th:href="@{/login}">LOGIN</a>
+    <div id="wrap">
+        <!--네비게이션 영역 시작-->
+        <nav id="nav" class="navbar navbar-expand-md fixed-top w-100">
+            <div class="container">
+                <!--네비로고-->
+                <a class="navbar-brand me-4" th:href="@{/}">
+                    <img src="/images/mainlogo.png" alt="메인로고" />
+                </a>
+                <!--햄버거 버튼-->
+                <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#nav-menu"
+                        aria-controls="nav-menu"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!--네비게이션 메뉴-->
+                <div class="collapse navbar-collapse nav-underline" id="nav-menu">
+                    <ul class="order-md-last navbar-nav my-2" style="font-size: 14px">
+                        <li class="nav-item">
+                            <a class="nav-link" th:if="${loginMember == null and loginAdmin == null}" th:href="@{/login}">LOGIN</a>
 
-                        <div th:if="${loginMember != null}">
-                            <div class="text-center">
-                                <span th:text="|${loginMember.name}님 환영합니다.|"></span>
+                            <div th:if="${loginMember != null}">
+                                <div class="text-center">
+                                    <span th:text="|${loginMember.name}님 환영합니다.|"></span>
+                                </div>
+                                <div class="d-md-flex">
+                                    <a th:href="@{/myInfo}" class="btn btn-sm">내정보</a>
+                                    <form class="text-end" th:action="@{/logout}" method="post">
+                                        <button class="btn btn-sm">LOGOUT</button>
+                                    </form>
+                                </div>
                             </div>
-                            <div class="d-flex">
-                                <a th:href="@{/myInfo}" class="btn btn-sm">내정보</a>
+
+                            <div th:if="${loginAdmin != null}">
+                                <span th:text="|${loginAdmin.name}님 환영합니다.|"></span>
                                 <form class="text-end" th:action="@{/logout}" method="post">
                                     <button class="btn btn-sm">LOGOUT</button>
                                 </form>
                             </div>
-                        </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:if="${loginMember == null and loginAdmin == null}" th:href="@{/add}">JOIN</a>
+                        </li>
 
-                        <div th:if="${loginAdmin != null}">
-                            <span th:text="|${loginAdmin.name}님 환영합니다.|"></span>
-                            <form class="text-end" th:action="@{/logout}" method="post">
-                                <button class="btn btn-sm">LOGOUT</button>
-                            </form>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:if="${loginMember == null and loginAdmin == null}" th:href="@{/add}">JOIN</a>
-                    </li>
-
-                </ul>
-                <ul class="order-md-first navbar-nav me-auto my-2">
-                    <li class="nav-item">
-                        <a class="nav-link active" th:href="@{/}">홈</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a
-                                class="nav-link dropdown-toggle"
-                                href="#"
-                                role="button"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                        >의료</a
-                        >
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" th:href="@{/hospital/hospital}">병원 정보</a></li>
-                            <li><a class="dropdown-item" th:href="@{/hospital/drugstore}">약국 정보</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/puppyshop/puppyshop}">용품점</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/cafe/cafe}">카페</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a
-                                class="nav-link dropdown-toggle"
-                                href="#"
-                                role="button"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                        >다이어리</a
-                        >
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" th:href="@{/diary}">다이어리</a></li>
-                            <li><a class="dropdown-item" th:href="@{/petProfile}">펫프로필</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a
-                                class="nav-link dropdown-toggle"
-                                href="#"
-                                role="button"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                        >
-                            커뮤니티
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a
-                                        class="dropdown-item"
-                                        th:href="@{/community/notice/notice_list}"
-                                >공지사항</a
-                                >
-                            </li>
-                            <li>
-                                <a
-                                        class="dropdown-item"
-                                        th:href="@{/community/board/board_list}"
-                                >게시판</a
-                                >
-                            </li>
-                            <li>
-                                <a
-                                        class="dropdown-item"
-                                        th:href="@{/community/question/question_list}"
-                                >Q&A</a
-                                >
-                            </li>
-                            <li>
-                                <a
-                                        class="dropdown-item"
-                                        th:href="@{/community/eventpage/event_list}"
-                                >이벤트</a
-                                >
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+                    </ul>
+                    <ul class="order-md-first navbar-nav me-auto my-2">
+                        <li class="nav-item">
+                            <a class="nav-link active" th:href="@{/}">홈</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a
+                                    class="nav-link dropdown-toggle"
+                                    href="#"
+                                    role="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                            >의료</a
+                            >
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" th:href="@{/hospital/hospital}">병원 정보</a></li>
+                                <li><a class="dropdown-item" th:href="@{/hospital/drugstore}">약국 정보</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/puppyshop/puppyshop}">용품점</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/cafe/cafe}">카페</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a
+                                    class="nav-link dropdown-toggle"
+                                    href="#"
+                                    role="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                            >다이어리</a
+                            >
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" th:href="@{/diary}">다이어리</a></li>
+                                <li><a class="dropdown-item" th:href="@{/petProfile}">펫프로필</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a
+                                    class="nav-link dropdown-toggle"
+                                    href="#"
+                                    role="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                            >
+                                커뮤니티
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a
+                                            class="dropdown-item"
+                                            th:href="@{/community/notice/notice_list}"
+                                    >공지사항</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                            class="dropdown-item"
+                                            th:href="@{/community/board/board_list}"
+                                    >게시판</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                            class="dropdown-item"
+                                            th:href="@{/community/question/question_list}"
+                                    >Q&A</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                            class="dropdown-item"
+                                            th:href="@{/community/eventPage/event_list}"
+                                    >이벤트</a
+                                    >
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
-    <!--네비게이션 영역 끝-->
+        </nav>
+        <!--네비게이션 영역 끝-->
 
-    <th:block layout:fragment="content"></th:block>
+        <th:block layout:fragment="content"></th:block>
 
-    <!--푸터 영역 시작-->
-    <footer id="footer">
-        <div class="container">
-            <div class="pt-5 text-muted">
-                <ul class="d-flex ps-0">
-                    <li><a href="#" class="pe-4">회사소개</a></li>
-                    <li><a href="#" class="pe-4">서비스 소개</a></li>
-                    <li><a href="#" class="pe-4">이용약관</a></li>
-                    <li><a href="#" class="fw-bold pe-4">개인정보 처리방침</a></li>
-                    <li><a href="#" class="pe-4">고객센터</a></li>
-                </ul>
-                <span
-                >이젠 코딩클럽 | 2조 퍼피코더스 | 고객센터 1234-5678 (평일
-              09:00~18:00 / 점심시간 12:00~13:00 / 주말 및 공휴일 휴무) |</span
-                >
-                <br />
-                <span
-                >사업자등록번호 123-45-67890 | 호스팅서비스제공자 : 마이크로소프트
-              유한회사, 구글클라우드코리아유한회사, 아마존웹서비시즈코리아
-              유한회사 |</span
-                >
-                <br />
-                <span>통신판매업 신고번호 : 제 2024-성남중원구-0000호 | </span>
-                <br />
-                <span
-                ><i>경기 성남시 중원구 광명로 4 5층</i> | "전자우편주소 :
-              "helpdesk@puppy.com |
-            </span>
-                <br />
-                <br />
-                <span>Copyright© 이젠 퍼피코더스(주) All rights reserved. | </span>
+        <!--푸터 영역 시작-->
+        <footer id="footer">
+            <div class="container">
+                <div class="pt-5 text-muted">
+                    <ul class="d-flex ps-0">
+                        <li><a href="#" class="pe-4">회사소개</a></li>
+                        <li><a href="#" class="pe-4">서비스 소개</a></li>
+                        <li><a href="#" class="pe-4">이용약관</a></li>
+                        <li><a href="#" class="fw-bold pe-4">개인정보 처리방침</a></li>
+                        <li><a href="#" class="pe-4">고객센터</a></li>
+                    </ul>
+                    <span
+                    >이젠 코딩클럽 | 2조 퍼피코더스 | 고객센터 1234-5678 (평일
+                  09:00~18:00 / 점심시간 12:00~13:00 / 주말 및 공휴일 휴무) |</span
+                    >
+                    <br />
+                    <span
+                    >사업자등록번호 123-45-67890 | 호스팅서비스제공자 : 마이크로소프트
+                  유한회사, 구글클라우드코리아유한회사, 아마존웹서비시즈코리아
+                  유한회사 |</span
+                    >
+                    <br />
+                    <span>통신판매업 신고번호 : 제 2024-성남중원구-0000호 | </span>
+                    <br />
+                    <span
+                    ><i>경기 성남시 중원구 광명로 4 5층</i> | "전자우편주소 :
+                  "helpdesk@puppy.com |
+                </span>
+                    <br />
+                    <br />
+                    <span>Copyright© 이젠 퍼피코더스(주) All rights reserved. | </span>
+                </div>
+                <div class="justify-content-end d-flex py-5">
+                    <img src="/images/footerlogo.png" alt="푸터로고" />
+                </div>
             </div>
-            <div class="justify-content-end d-flex py-5">
-                <img src="/images/footerlogo.png" alt="푸터로고" />
-            </div>
-        </div>
-    </footer>
-    <!--푸터 영역 끝-->
-</div>
+        </footer>
+        <!--푸터 영역 끝-->
+    </div>
 
-<!--부트스트랩 자바스크립트-->
-<script
-        src="/javascript/bootstrap.bundle.js"
-        type="text/javascript"
-></script>
-<!--slick슬라이드-->
-<script
-        type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
-></script>
-<!--MY 자바스크립트-->
-<script src="/javascript/script.js" type="text/javascript"></script>
-<script src="/javascript/search.js" type="text/javascript"></script>
+    <!--부트스트랩 자바스크립트-->
+    <script
+            src="/javascript/bootstrap.bundle.js"
+            type="text/javascript"
+    ></script>
+    <!--slick슬라이드-->
+    <script
+            type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
+    ></script>
+    <!--MY 자바스크립트-->
+    <script src="/javascript/script.js" type="text/javascript"></script>
+    <script src="/javascript/search.js" type="text/javascript"></script>
 
 </body>
 </html>

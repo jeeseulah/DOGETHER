@@ -18,6 +18,6 @@ public class PuppyshopController {
         model.addAttribute("loginMember", loginMember);
         model.addAttribute("loginAdmin", loginAdmin);
 
-        return "/puppyshop/puppyshop";
+        return "puppyshop/puppyshop";
     }
 }

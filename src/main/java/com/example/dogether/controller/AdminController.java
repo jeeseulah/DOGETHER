@@ -35,7 +35,7 @@ public class AdminController {
     }
 
     // 회원 수정 페이지
-    @GetMapping("/admin/{memberid}/edit")
+    @GetMapping("/admin/memberList/{memberid}/edit")
     public String updateMemberForm(@SessionAttribute(name = SessionConst.LOGIN_ADMIN, required = false) Admin loginAdmin, @PathVariable("memberid") Long memberid, Model model){
 
         Optional<Member> findMember = memberService.findOne(memberid);
@@ -61,7 +61,7 @@ public class AdminController {
         return "admin/memberList";
     }
 
-    @PostMapping("/admin/{memberid}/edit")
+    @PostMapping("/admin/memberList/{memberid}/edit")
     public String updateMember(@Validated @ModelAttribute("memberForm") MemberForm form, BindingResult bindingResult
             , @SessionAttribute(name = SessionConst.LOGIN_ADMIN
             , required = false) Admin loginAdmin, Model model){
@@ -85,7 +85,7 @@ public class AdminController {
     }
 
     //삭제
-    @GetMapping("/admin/{memberid}/delete")
+    @GetMapping("/admin/memberList/{memberid}/delete")
     public String delete(@PathVariable("memberid") Long memberid){
         Optional<Member> findMember = memberService.findOne(memberid);
 

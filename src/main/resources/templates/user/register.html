@@ -4,31 +4,28 @@
             <form th:object="${memberForm}" method="post" th:action="@{/add}" class="rounded-3 bg-loginform p-4 shadow">
                 <legend class="text-center my-3 fs-3 fw-bold brownBoldText">회원가입</legend>
     <div class="mb-3">
-        <label class="form-label fw-bold brownBoldText" th:for="name">이름 <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div></label>
+        <label class="form-label fw-bold brownBoldText" th:for="name">이름 </label>
         <input type="text" th:field="*{name}" class="form-control" th:errorclass="field-error">
-        <div class="field-error" th:error="*{name}"></div>
+        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="field-error" ></div>
     </div>
 
     <div class="mb-3">
-        <label class="form-label fw-bold brownBoldText" th:for="loginId">이메일 <div th:if="${#fields.hasErrors('loginId')}" th:errors="*{loginId}"></div></label>
+        <label class="form-label fw-bold brownBoldText" th:for="loginId">이메일</label>
         <input type="email" th:field="*{loginId}" class="form-control" th:errorclass="field-error">
+        <div th:if="${#fields.hasErrors('loginId')}" th:errors="*{loginId}" class="field-error"></div>
         <button type="submit" formaction="/checkLoginId" class="btn btn-brown bg-brown mt-2">중복 확인</button>
         <span class="mx-1" th:if="${isDuplicate != null}" th:text="${isDuplicate} ? '이미 사용 중인 아이디입니다.' : '사용 가능한 아이디입니다.'" th:classappend="${isDuplicate} ? 'text-danger' : 'text-primary'"></span>
-        <div class="field-error" th:error="*{loginId}"></div>
     </div>
 
     <div class="mb-3">
-        <label class="form-label fw-bold brownBoldText" th:for="password">비밀번호 <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div></label>
-        <input type="password" th:field="*{password}" class="form-control" th:errorclass="field-error">
-        <div class="field-error" th:error="*{password}"></div>
+        <label class="form-label fw-bold brownBoldText" th:for="password">비밀번호</label>
+        <input type="password" th:field="*{password}" class="form-control">
     </div>
 
     <div class="mb-3">
         <label class="form-label fw-bold brownBoldText" th:for="checkPassword">비밀번호 확인</label>
-        <input type="password" th:field="*{checkPassword}" class="form-control" th:errorclass="field-error">
-        <div class="field-error" th:error="*{checkPassword}"></div>
+        <input type="password" th:field="*{checkPassword}" class="form-control">
     </div>
-    <div th:if="${#fields.hasErrors('checkPassword')}" th:errors="*{checkPassword}" class="text-danger mb-3"></div>
 
     <div class="mb-3">
         <label class="form-label fw-bold brownBoldText" th:for="address">주소</label>
@@ -36,9 +33,9 @@
     </div>
 
                 <div class="mb-3">
-                    <label class="form-label fw-bold brownBoldText" th:for="tel">전화번호 <div th:if="${#fields.hasErrors('tel')}" th:errors="*{tel}"></div></label>
+                    <label class="form-label fw-bold brownBoldText" th:for="tel">전화번호</label>
                     <input type="text" th:field="*{tel}" class="form-control" th:errorclass="field-error">
-                    <div class="field-error" th:error="*{tel}"></div>
+                    <div th:if="${#fields.hasErrors('tel')}" th:errors="*{tel}" class="field-error"></div>
                 </div>
 
     <div class="my-2 d-flex justify-content-center">

@@ -29,7 +29,6 @@ public class Diary {
 
     private String note;
 
-    // 이용할 멤버 정보 갖고 오기
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;

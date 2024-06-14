@@ -5,6 +5,7 @@ import com.example.dogether.domain.admin.Answer;
 import com.example.dogether.domain.member.Member;
 import com.example.dogether.domain.member.Question;
 import com.example.dogether.dto.AnswerForm;
+import com.example.dogether.dto.BoardForm;
 import com.example.dogether.dto.QuestionForm;
 import com.example.dogether.service.AnswerService;
 import com.example.dogether.service.MemberService;
@@ -99,9 +100,6 @@ public class QuestionController {
         model.addAttribute("urlType","answer_create");
         model.addAttribute("actionId",questionid);
 
-        //Answer answer = this.answerService.getAnswer(questionid);
-        //model.addAttribute("answer", answer);
-
         return "community/question/question_detail";
     }
 
@@ -165,9 +163,9 @@ public class QuestionController {
 
     //Q&A 비번체크 페이지
     @GetMapping("/community/question/question_pwd/{questionid}")
-    public String questionPwdForm(@SessionAttribute(name=SessionConst.LOGIN_MEMBER, required = false) Member loginMember,  QuestionForm questionForm, Model model, @PathVariable("questionid") Long questionid){
+    public String questionPwdForm(@SessionAttribute(name=SessionConst.LOGIN_MEMBER, required = false) Member loginMember, @SessionAttribute(name=SessionConst.LOGIN_ADMIN, required = false) Admin loginAdmin, QuestionForm questionForm, Model model, @PathVariable("questionid") Long questionid){
         model.addAttribute("loginMember", loginMember);
-
+        model.addAttribute("loginAdmin", loginAdmin);
 
         Question question = this.questionService.getQuestion(questionid);
         model.addAttribute("question",question);
@@ -180,16 +178,15 @@ public class QuestionController {
     }
 
     @PostMapping("/community/question/question_pwd/{questionid}")
-    public String questionPwd(@SessionAttribute(name=SessionConst.LOGIN_MEMBER, required = false) Member loginMember, @PathVariable("questionid") Long questionid, QuestionForm questionForm, Model model){
+    public String questionPwd(@SessionAttribute(name=SessionConst.LOGIN_MEMBER, required = false) Member loginMember, @SessionAttribute(name=SessionConst.LOGIN_ADMIN, required = false) Admin loginAdmin, @PathVariable("questionid") Long questionid, QuestionForm questionForm, Model model){
         model.addAttribute("loginMember", loginMember);
+        model.addAttribute("loginAdmin", loginAdmin);
         Question findquestion = this.questionService.getQuestion(questionid);
-
-        System.out.println(questionForm.getPassword());
-        System.out.println(findquestion.getPassword());
-        System.out.println(!questionForm.getPassword().equals(findquestion.getPassword()));
 
         if(!questionForm.getPassword().equals(findquestion.getPassword())) {
             model.addAttribute("loginMember", loginMember);
+            model.addAttribute("loginAdmin", loginAdmin);
+            model.addAttribute("question",findquestion);
             String message = "비밀번호가 맞지 않습니다.";
             model.addAttribute("message", message);
             return "community/question/question_pwd";

@@ -25,15 +25,15 @@ public class FindController {
     @GetMapping("/user/findIdForm")
     public String showFindIdForm(Model model) {
         model.addAttribute("findIdForm", new FindIdForm());
-        return "/user/findIdForm";
+        return "user/findIdForm";
     }
 
     @GetMapping("/user/findIdResult")
     public String showFindIdResult(Model model) {
-        return "/user/findIdResult";
+        return "user/findIdResult";
     }
 
-    @PostMapping("user/findIdForm")
+    @PostMapping("/user/findIdForm")
     public String findId(@ModelAttribute("findIdForm") FindIdForm findIdForm, Model model) {
         String loginId = findService.findLoginId(findIdForm.getName(), findIdForm.getTel());
         if (loginId == null) {
@@ -41,21 +41,21 @@ public class FindController {
         } else {
             model.addAttribute("loginId", loginId);
         }
-        return "/user/findIdResult";
+        return "user/findIdResult";
     }
 
     @GetMapping("/user/findPwForm")
     public String showFindPwForm(Model model) {
         model.addAttribute("findPwForm", new FindPwForm());
-        return "/user/findPwForm";
+        return "user/findPwForm";
     }
 
     @GetMapping("/user/findPwResult")
     public String showFindPwResult() {
-        return "/user/findPwResult";
+        return "user/findPwResult";
     }
 
-    @PostMapping("user/findPwForm")
+    @PostMapping("/user/findPwForm")
     public String findPw(@ModelAttribute("findPwForm") FindPwForm findPwForm, Model model) {
         String password = findService.findPassword(findPwForm.getName(), findPwForm.getLoginId());
         if (password == null) {
@@ -63,6 +63,6 @@ public class FindController {
         } else {
             model.addAttribute("password", password);
         }
-        return "/user/findPwResult";
+        return "user/findPwResult";
     }
 }

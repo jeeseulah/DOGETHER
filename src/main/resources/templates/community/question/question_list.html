@@ -103,9 +103,15 @@
                   <td>
                     <i class="bi bi-lock-fill bg-secondary-subtle rounded p-1" th:if="${question.isShow}"></i>
                     <i class="bi bi-unlock-fill bg-secondary-subtle rounded p-1" th:unless="${question.isShow}"></i>
-                    <a th:href="@{/community/question/question_detail/{questionid}(questionid=${question.getId()})}" th:if="${question.isShow == false}" th:text="${question.subject}">문의드려요~</a>
-                    <a th:href="@{/community/question/question_pwd/{questionid}(questionid=${question.getId()})}" th:if="${question.isShow != false and loginAdmin == null} " th:text="${question.subject}">문의드려요~</a>
-                    <a th:href="@{/community/question/question_detail/{questionid}(questionid=${question.getId()})}" th:if="${question.isShow != false and loginAdmin != null}" th:text="${question.subject}">문의드려요~</a>
+                    <a th:href="@{/community/question/question_detail/{questionid}(questionid=${question.getId()})}"
+                       th:if="${question.isShow == false}"
+                       th:text="${question.subject}">Q&A제목</a>
+                    <a th:href="@{/community/question/question_pwd/{questionid}(questionid=${question.getId()})}"
+                       th:if="${question.isShow != false and loginAdmin == null} "
+                       th:text="${question.subject}">Q&A제목</a>
+                    <a th:href="@{/community/question/question_detail/{questionid}(questionid=${question.getId()})}"
+                       th:if="${question.isShow != false and loginAdmin != null}"
+                       th:text="${question.subject}">Q&A제목</a>
                   </td>
                   <td><span th:text="${question.author.name}" style="font-size: 13px">글쓴이</span></td>
                   <!--td><small th:text="${question.author.loginId}">홍길동</small></td-->
@@ -183,11 +189,9 @@
             </div>
           </div>
         </div>
-
         <!--고객센터-->
         <th:block th:replace="fragments/community_footer :: communityFragmentFooter"></th:block>
       </div>
       <!--Q&A 영역 끝-->
   </div>
-
 </html>
