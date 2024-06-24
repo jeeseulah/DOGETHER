@@ -22,6 +22,10 @@ PW: 1234
 
 ![1oR8r](https://github.com/jeeseulah/DOGETHER/assets/165135312/fdcb2e6a-bc7d-47db-826b-f328b8339bec)
 
+> 🗝️ **함께하개 발표 ppt자료**
+
+👉[이젠팀프로젝트_2조함께하개_240617.pdf](https://github.com/user-attachments/files/15949468/_2._240617.pdf)
+
 <br/>
 
 ## 0. 👣팀원 소개 & 역할 분담
